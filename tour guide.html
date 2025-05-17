@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>TOUR GUIDE</title>
+    <link rel="stylesheet" type="text/css" href="tour guide.css">
+    <script>
+{
+        function toggleBookingForm(button, guideName, guidePrice)
+     {
+    let guideDiv = button.parentElement;
+    let form = guideDiv.querySelector('.bookingForm');
+
+    // Hide all other booking forms
+    document.querySelectorAll('.bookingForm').forEach(f => {
+        if (f !== form) f.style.display = 'none';
+    });
+
+    // Toggle current guide's form
+    form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+
+    // Reset the form to clear previous inputs
+    form.querySelector('form').reset();
+
+    // Set guide name & price in the hidden input fields
+    form.querySelector('[name="guide_name"]').value = guideName;
+    form.querySelector('[name="guide_price"]').value = guidePrice;
+     }
+}
+
+    </script>
+	 <style>
+        .success-box {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            margin: 20px auto;
+            width: 50%;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 18px;
+}
+    </style>
+</head>
+<body>
+	<h1 class="heading">Available Tour-guides</h1>
+	<div class="main">
+        <ul>
+          <ul class="list">
+            <li class="logo"><a href="mainPage.html"><img src="earth-globe.png" alt="Logo" style="width:36px;height:36px"></a></li>
+            <div class="search">
+	            <form method="POST" action="info.php">
+	              <input type="text" name="search_p" placeholder="Search.." size="30">
+	              <input type="image" name="submit_p" src="search_icon.png" alt="Search image" style="width:22px;height:22px; margin-left: 35px;">
+	            </form>
+          	</div>
+          </ul>
+	      <ul class="list2">
+            <li><a href="mainPage.html">Home</a></li>
+            <li><a href="destination.html">Destination</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li class="active-menu"><a href="tour guide.html">Tour Guide</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+	</ul>
+    </div>
+
+    <!-- Tour Guides Section -->
+    <div class="tour ">
+		<!-- Success Message Box -->
+		<div id="success-message" class="success-box">
+			✅ Your tour-guide has been booked successfully!
+		</div>
+		
+        <!-- Tour Guide 1 -->
+        <div class="guide">
+            <img src="images/destination/giude2.webp" alt="Tour Guide 1" style="width:150px;height:150px;">
+            <p><strong>John Doe</strong></p>
+            <p>Expert in historical tours</p>
+            <p>Price: 500/hour</p>
+            <button onclick="toggleBookingForm(this, 'John Doe', 500)">Book Now</button>
+
+            <!-- Booking Form -->
+            <div class="bookingForm" style="display:none;">
+                <h3>Book Now</h3>
+                <form method="POST" action="tour guide.php">
+                    <input type="hidden" name="guide_name">
+                    <input type="hidden" name="guide_price">
+                    
+                    <label for="name">Your Name:</label>
+                    <input type="text" name="user_name" required>
+
+                    <label for="email">Your Email:</label>
+                    <input type="email" name="user_email" required>
+
+                    <label for="date">Booking Date:</label>
+                    <input type="date" name="booking_date" required>
+
+                    <button type="submit">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tour Guide 2 -->
+        <div class="guide">
+            <img src="images/destination/guide1.avif" alt="Tour Guide 2" style="width:150px;height:150px;">
+            <p><strong>Sarah Lee</strong></p>
+            <p>Specialist in nature tours</p>
+            <p>Price: 400/hour</p>
+            <button onclick="toggleBookingForm(this, 'Sarah Lee', 400)">Book Now</button>
+
+            <div class="bookingForm" style="display:none;">
+                <h3>Book Now</h3>
+                <form method="POST" action="tour guide.php">
+                    <input type="hidden" name="guide_name">
+                    <label for="name">Your Name:</label>
+                    <input type="text" name="user_name" required>
+
+                    <label for="email">Your Email:</label>
+                    <input type="email" name="user_email" required>
+
+                    <label for="date">Booking Date:</label>
+                    <input type="date" name="booking_date" required>
+
+                    <button type="submit">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+	 <div class="guide">
+            <img src="images/destination/guide3.avif" alt="Tour Guide 3" style="width:150px;height:150px;">
+            <p><strong>Aidan</strong></p>
+            <p>Specialist in historical cities tours</p>
+            <p>Price:400/hour</p>
+            <button onclick="toggleBookingForm(this, 'Aidan' ,400)">Book Now</button>
+
+            <div class="bookingForm" style="display:none;">
+                <h3>Book Now</h3>
+                <form method="POST" action="tour guide.php">
+                    <input type="hidden" name="guide_name">
+                    <label for="name">Your Name:</label>
+                    <input type="text" name="user_name" required>
+
+                    <label for="email">Your Email:</label>
+                    <input type="email" name="user_email" required>
+
+                    <label for="date">Booking Date:</label>
+                    <input type="date" name="booking_date" required>
+
+                    <button type="submit">Confirm Booking</button>
+                </form>
+            </div>
+        </div> 
+	<div class="guide">
+		<img src="images/destination/guide4.avif" alt="Tour Guide 4" style="width:150px;height:150px;">
+			<p><strong>Michael Brown</strong></p>
+			<p>Adventure and trekking guide</p>
+			<p>Price: 550/hour</p>
+
+		<button onclick="toggleBookingForm(this, 'Michael Brown',550)">Book Now</button>
+
+		<div class="bookingForm" style="display:none;">
+			<h3>Book Now</h3>
+			<form method="POST" action="tour guide.php">
+				<input type="hidden" name="guide_name">
+				<label for="name">Your Name:</label>
+				<input type="text" name="user_name" required>
+
+				<label for="email">Your Email:</label>
+				<input type="email" name="user_email" required>
+
+				<label for="date">Booking Date:</label>
+				<input type="date" name="booking_date" required>
+
+				<button type="submit">Confirm Booking</button>
+			</form>
+		</div>
+	</div>
+
+<div class="guide">
+	<img src="images/destination/guide5.avif" alt="Tour Guide 5" style="width:150px;height:150px;">
+			<p><strong>Jane Smith</strong></p>
+			<p>Food and culinary expert</p>
+			<p>Price: 600/hour</p>
+	<button onclick="toggleBookingForm(this, 'Jane Smith',600)">Book Now</button>
+
+	<div class="bookingForm" style="display:none;">
+		<h3>Book Now</h3>
+		<form method="POST" action="tour guide.php">
+			<input type="hidden" name="guide_name">
+			<label for="name">Your Name:</label>
+			<input type="text" name="user_name" required>
+
+			<label for="email">Your Email:</label>
+			<input type="email" name="user_email" required>
+
+			<label for="date">Booking Date:</label>
+			<input type="date" name="booking_date" required>
+
+			<button type="submit">Confirm Booking</button>
+		</form>
+	</div>
+</div>
+
+ <div class="guide">
+	<img src="images/destination/guide6.avif" alt="Tour Guide 6" style="width:150px;height:150px;">
+			<p><strong>David Wilson</strong></p>
+			<p>Wildlife and safari guide</p>
+			<p>Price: 650/hour</p>
+	<button onclick="toggleBookingForm(this, 'David Wilson',650)">Book Now</button>
+
+	<div class="bookingForm" style="display:none;">
+		<h3>Book Now</h3>
+		<form method="POST" action="tour guide.php">
+			<input type="hidden" name="guide_name">
+			<label for="name">Your Name:</label>
+			<input type="text" name="user_name" required>
+
+			<label for="email">Your Email:</label>
+			<input type="email" name="user_email" required>
+
+			<label for="date">Booking Date:</label>
+			<input type="date" name="booking_date" required>
+
+			<button type="submit">Confirm Booking</button>
+		</form>
+	</div>
+</div>
+
+<div class="guide">
+	<img src="images/destination/guide7.avif" alt="Tour Guide 7" style="width:150px;height:150px;">
+			<p><strong>Olivia Martinez</strong></p>
+			<p>River and Mountain expert</p>
+			<p>Price: 550/hour</p>
+	<button onclick="toggleBookingForm(this, 'Olivia Martinez',550)">Book Now</button>
+
+	<div class="bookingForm" style="display:none;">
+		<h3>Book Now</h3>
+		<form method="POST" action="tour guide.php">
+			<input type="hidden" name="guide_name">
+			<label for="name">Your Name:</label>
+			<input type="text" name="user_name" required>
+
+			<label for="email">Your Email:</label>
+			<input type="email" name="user_email" required>
+
+			<label for="date">Booking Date:</label>
+			<input type="date" name="booking_date" required>
+
+			<button type="submit">Confirm Booking</button>
+		</form>
+	</div>
+</div>
+
+ <div class="guide">
+	<img src="images/destination/guide8.avif" alt="Tour Guide 8" style="width:150px;height:150px;">
+			<p><strong>Ryan Johnson</strong></p>
+			<p>Architecture and urban exploration</p>
+			<p>Price: 500/hour</p>
+	<button onclick="toggleBookingForm(this, 'Ryan Johnson',500)">Book Now</button>
+
+	<div class="bookingForm" style="display:none;">
+		<h3>Book Now</h3>
+		<form method="POST" action="tour guide.php">
+			<input type="hidden" name="guide_name">
+			<label for="name">Your Name:</label>
+			<input type="text" name="user_name" required>
+
+			<label for="email">Your Email:</label>
+			<input type="email" name="user_email" required>
+
+			<label for="date">Booking Date:</label>
+			<input type="date" name="booking_date" required>
+
+			<button type="submit">Confirm Booking</button>
+		</form>
+	</div>
+</div>
+
+</div>
+</body>

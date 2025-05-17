@@ -1,0 +1,149 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Booking Form</title>
+    <link rel="stylesheet" type="text/css" href="css/booking.css">
+    <script>
+        const pricePerDay = 100; // Change the price per day if needed
+
+        function validateForm() {
+            if (isEmpty(document.getElementById('ffirst').value.trim())) {
+                alert('First name is required!');
+                return false;
+            }
+            if (isEmpty(document.getElementById('flast').value.trim())) {
+                alert('Last name is required!');
+                return false;
+            }
+            if (!validateEmail(document.getElementById('femail').value.trim())) {
+                alert('Email must be a valid email address!');
+                return false;
+            }
+            if (!validateDates()) {
+                alert('End date must be after start date!');
+                return false;
+            }
+            if (document.getElementById('total_payment').value == "" || document.getElementById('total_payment').value == 0) {
+                alert('Please select valid dates to calculate payment.');
+                return false;
+            }
+            return true;
+        }
+
+        function isEmpty(str) { 
+            return (str.length === 0 || !str.trim()); 
+        }
+
+        function validateEmail(email) {
+            var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(email);
+        }
+
+        function validateDates() {
+            let startDate = new Date(document.getElementById('startDate').value);
+            let endDate = new Date(document.getElementById('endDate').value);
+            return startDate < endDate;
+        }
+
+        function calculatePayment() {
+            let startDate = new Date(document.getElementById('startDate').value);
+            let endDate = new Date(document.getElementById('endDate').value);
+            if (startDate && endDate && startDate < endDate) {
+                let diffTime = endDate.getTime() - startDate.getTime();
+                let diffDays = diffTime / (1000 * 3600 * 24);
+                let totalPayment = diffDays * pricePerDay;
+                document.getElementById('total_payment').value = "" + totalPayment;
+            } else {
+                document.getElementById('total_payment').value = "";
+            }
+        }
+
+        window.onload = function () {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has("success")) {
+                document.getElementById("success-message").style.display = "block";
+            }
+        };
+    </script>
+    <style>
+        .success-box {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            margin: 20px auto;
+            width: 50%;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        
+        label {
+            color: #ffffff; 
+            font-weight: bold;
+        }
+
+        input[readonly] {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            background: rgba(251, 204, 78, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>Tour Booking</h1>
+
+    <div id="success-message" class="success-box">
+        ✅ Your tour has been booked successfully!
+    </div>
+
+    <div class="container">
+        <form method="POST" action="booking.php" name="form" onsubmit="return validateForm()" autocomplete="off">
+            <div class="textbox">
+                <input type="text" id="ffirst" placeholder="First Name" name="ffirst" required>
+            </div>
+
+            <div class="textbox">
+                <input type="text" id="flast" placeholder="Last Name" name="flast" required>
+            </div>
+
+            <div class="textbox">
+                <input type="email" id="femail" placeholder="Email" name="femail" required>
+            </div>
+
+            <div class="textbox">
+                <input type="text" placeholder="City" name="city" required>
+            </div>
+
+            <div class="textbox">
+                <input type="tel" placeholder="Phone" name="fphone" maxlength="10" pattern="[0-9]{10}" required title="Enter a valid 10-digit phone number">
+            </div>
+
+            <div class="textbox">
+                <input type="text" placeholder="Destination" name="fdesti" required>
+            </div>
+
+            <div class="textbox">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required onchange="calculatePayment()">
+            </div>
+
+            <div class="textbox">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required onchange="calculatePayment()">
+            </div>
+
+            <div class="textbox">
+                <input type="text" id="total_payment" name="total_payment" placeholder="Total Payment" readonly>
+            </div>
+
+            <div class="btn">
+                <input name="submit" value="Submit" type="submit">
+            </div>
+        </form>      
+    </div>
+</body>
+</html>
